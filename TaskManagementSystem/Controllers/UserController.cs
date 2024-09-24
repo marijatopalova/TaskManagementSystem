@@ -5,7 +5,7 @@ using TaskManagementSystem.Services;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/user")]
     [ApiController]
     public class UserController(IUserService userService) : ControllerBase
     {

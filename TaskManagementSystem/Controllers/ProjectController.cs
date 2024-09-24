@@ -5,7 +5,7 @@ using TaskManagementSystem.Services;
 
 namespace TaskManagementSystem.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/project")]
     [ApiController]
     public class ProjectController(IProjectService projectService) : ControllerBase
     {
