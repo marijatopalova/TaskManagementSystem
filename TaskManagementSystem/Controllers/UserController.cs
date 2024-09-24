@@ -21,7 +21,7 @@ namespace TaskManagementSystem.Controllers
         [Produces("application/json")]
         [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
+        public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto userDto)
         {
             if (!ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace TaskManagementSystem.Controllers
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetUsersByProject(int projectId)
+        public async Task<ActionResult<List<UserDto>>> GetUsersByProject(int projectId)
         {
             var users = await userService.GetUsersByProjectIdAsync(projectId);
             if (users == null || users.Count == 0)

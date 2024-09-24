@@ -113,7 +113,7 @@ namespace TaskManagementSystem.Controllers
         [HttpGet("{taskId}")]
         [ProducesResponseType(typeof(TaskDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetTaskById(string taskId)
+        public async Task<ActionResult<TaskDto>> GetTaskById(string taskId)
         {
             var task = await taskService.GetTasksByIdAsync(taskId);
             if (task == null)
