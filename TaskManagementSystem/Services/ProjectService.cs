@@ -70,10 +70,7 @@ namespace TaskManagementSystem.Services
                 throw new ArgumentException("User is already part of the project");
             }
 
-            project.Users.Add(new User
-            {
-                Id = userId
-            });
+            project.Users.Add(user);
 
             await projectRepository.UpdateProjectAsync(project);
         }

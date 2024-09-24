@@ -23,7 +23,7 @@ namespace TaskManagementSystem.Services
                 throw new ArgumentException("Project not found");
             }
 
-            if(project.Users.Any(x => x.Id == taskDto.UserId))
+            if(!project.Users.Any(x => x.Id == taskDto.UserId))
             {
                 throw new ArgumentException("User is not part of the project");
             }
@@ -105,7 +105,9 @@ namespace TaskManagementSystem.Services
                 Status = task.Status,
                 Description = task.Description,
                 DueDate = task.DueDate,
-                Title = task.Title
+                Title = task.Title,
+                Id = task.Id,
+                ProjectId = task.ProjectId
             };
 
             return taskDto;

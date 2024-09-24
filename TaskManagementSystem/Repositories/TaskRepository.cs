@@ -36,7 +36,7 @@ namespace TaskManagementSystem.Repositories
             return await dbContext.Tasks
                                     .Include(x => x.User)
                                     .Include(x => x.Project)
-                                    .Where(x => x.Id.Equals(id))
+                                    .Where(x => x.Id.ToString() == id)
                                     .SingleOrDefaultAsync();
         }
 
