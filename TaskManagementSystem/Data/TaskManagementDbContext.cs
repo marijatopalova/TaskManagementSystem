@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using TaskManagementSystem.Models;
+using TaskManagementSystem.Entities;
 
 namespace TaskManagementSystem.Data
 {

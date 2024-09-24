@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.Models
+﻿namespace TaskManagementSystem.Entities
 {
     public class User
     {

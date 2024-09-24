@@ -1,5 +1,5 @@
 ﻿using TaskManagementSystem.DTOs;
-using TaskManagementSystem.Models;
+using TaskManagementSystem.Entities;
 using TaskManagementSystem.Repositories;
 
 namespace TaskManagementSystem.Services

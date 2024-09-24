@@ -8,7 +8,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public List<TaskDto> Tasks { get; set; } = new List<TaskDto>();
-        public List<UserDto> Users { get; set; } = new List<UserDto>();
+        public List<TaskDto> Tasks { get; set; } = [];
+        public List<UserDto> Users { get; set; } = [];
     }
 }
