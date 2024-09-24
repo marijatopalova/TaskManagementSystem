@@ -12,7 +12,6 @@ A RESTful API built using ASP.NET Core (.NET 8) for managing tasks, users, and p
 - **Task Management:** Create, update, delete, and retrieve tasks associated with users and projects.
 - **Project Management:** Manage projects and associate users and tasks with each project.
 - **Swagger Integration:** Comprehensive API documentation with descriptions for each endpoint.
-- **AutoMapper:** Easy object-to-object mapping between DTOs and entities.
 - **NUnit Testing:** Unit tests for services and repositories.
 
 ---
@@ -21,7 +20,6 @@ A RESTful API built using ASP.NET Core (.NET 8) for managing tasks, users, and p
 
 - **ASP.NET Core** (.NET 8)
 - **Entity Framework Core**
-- **AutoMapper**
 - **NUnit** (for unit testing)
 - **Swagger / Swashbuckle**
 - **SQL Server**
