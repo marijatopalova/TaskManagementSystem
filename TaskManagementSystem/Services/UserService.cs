@@ -58,9 +58,9 @@ namespace TaskManagementSystem.Services
 
             var users = project.Users.Select(pu => new UserDto()
             {
-                Name =pu.Name,
-                Email =pu.Email,
-                Id =pu.Id,
+                Name = pu.Name,
+                Email = pu.Email,
+                Id = pu.Id,
             }).ToList();
 
             return users;
