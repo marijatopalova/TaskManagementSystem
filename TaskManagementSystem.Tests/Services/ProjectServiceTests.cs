@@ -6,8 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TaskManagementSystem.DTOs;
 using TaskManagementSystem.Entities;
+using TaskManagementSystem.Entities;
 using TaskManagementSystem.Repositories;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.Repositories;
+using TaskManagementSystem.Services.V1;
 
 namespace TaskManagementSystem.Tests.Services
 {

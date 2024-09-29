@@ -1,13 +1,13 @@
-﻿using TaskManagementSystem.DTOs;
+﻿using TaskManagementSystem.DTOs.V2;
 using TaskManagementSystem.Entities;
 using TaskManagementSystem.Repositories;
 
-namespace TaskManagementSystem.Services
+namespace TaskManagementSystem.Services.V2
 {
-    public class UserService(IUserRepository userRepository, 
-        IProjectRepository projectRepository) : IUserService
+    public class UserServiceV2(IUserRepository userRepository,
+        IProjectRepository projectRepository) : IUserServiceV2
     {
-        public async Task<UserDto> CreateUserAsync(UserDto userDto)
+        public async Task<UserDtoV2> CreateUserAsync(UserDtoV2 userDto)
         {
             var user = new User
             {
@@ -19,18 +19,18 @@ namespace TaskManagementSystem.Services
             return userDto;
         }
 
-        public async Task<List<UserDto>> GetAllUsersAsync()
+        public async Task<List<UserDtoV2>> GetAllUsersAsync()
         {
             var users = await userRepository.GetAllUsersAsync();
-            return users.Select(u => new UserDto() 
-            { 
+            return users.Select(u => new UserDtoV2()
+            {
                 Name = u.Name,
                 Email = u.Email,
                 Id = u.Id
             }).ToList();
         }
 
-        public async Task<UserDto> GetUserByIdAsync(int userId)
+        public async Task<UserDtoV2> GetUserByIdAsync(int userId)
         {
             var user = await userRepository.GetUserByIdAsync(userId);
             if (user == null)
@@ -38,7 +38,7 @@ namespace TaskManagementSystem.Services
                 throw new ArgumentException("User not found");
             }
 
-            var userDto = new UserDto
+            var userDto = new UserDtoV2
             {
                 Email = user.Email,
                 Id = user.Id,
@@ -48,7 +48,7 @@ namespace TaskManagementSystem.Services
             return userDto;
         }
 
-        public async Task<List<UserDto>> GetUsersByProjectIdAsync(int projectId)
+        public async Task<List<UserDtoV2>> GetUsersByProjectIdAsync(int projectId)
         {
             var project = await projectRepository.GetProjectByIdAsync(projectId);
             if (project == null)
@@ -56,7 +56,7 @@ namespace TaskManagementSystem.Services
                 throw new ArgumentException("Project not found");
             }
 
-            var users = project.Users.Select(pu => new UserDto()
+            var users = project.Users.Select(pu => new UserDtoV2()
             {
                 Name = pu.Name,
                 Email = pu.Email,

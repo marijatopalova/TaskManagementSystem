@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystem.DTOs
+﻿namespace TaskManagementSystem.DTOs.V2
 {
-    public class TaskDto
+    public class TaskDtoV2
     {
         public int Id { get; set; }
         public string Title { get; set; }

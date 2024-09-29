@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.DTOs;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.DTOs.V2;
+using TaskManagementSystem.Services.V2;
 
-namespace TaskManagementSystem.Controllers
+namespace TaskManagementSystem.Controllers.V2
 {
-    [Route("api/project")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/projects")]
     [ApiController]
-    public class ProjectController(IProjectService projectService) : ControllerBase
+    public class ProjectController(IProjectServiceV2 projectService) : ControllerBase
     {
         /// <summary>
         /// Creates a new project.
@@ -19,9 +21,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="400">If the task is invalid.</response>
         [HttpPost]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(ProjectDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProjectDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<ProjectDto>> CreateProject([FromBody] ProjectDto projectDto)
+        public async Task<ActionResult<ProjectDtoV2>> CreateProject([FromBody] ProjectDtoV2 projectDto)
         {
             if (!ModelState.IsValid)
             {
@@ -40,8 +42,8 @@ namespace TaskManagementSystem.Controllers
         /// <response code="200">Returns a list of all projects.</response>
         [HttpGet]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(List<ProjectDto>), StatusCodes.Status200OK)]
-        public async Task<ActionResult<List<ProjectDto>>> GetAllProjects()
+        [ProducesResponseType(typeof(List<ProjectDtoV2>), StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<ProjectDtoV2>>> GetAllProjects()
         {
             var projects = await projectService.GetAllProjectsAsync();
             return Ok(projects);
@@ -57,9 +59,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="404">If project was not found.</response>
         [HttpGet("{projectId}")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(ProjectDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ProjectDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ProjectDto>> GetProjectById(int projectId)
+        public async Task<ActionResult<ProjectDtoV2>> GetProjectById(int projectId)
         {
             var project = await projectService.GetProjectByIdAsync(projectId);
             if (project == null)

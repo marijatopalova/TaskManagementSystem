@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.DTOs;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.DTOs.V2;
+using TaskManagementSystem.Services.V2;
 
-namespace TaskManagementSystem.Controllers
+namespace TaskManagementSystem.Controllers.V2
 {
-    [Route("api/task")]
+    [ApiVersion("2.0")]
+    [Route("api/v{version:apiVersion}/tasks")]
     [ApiController]
-    public class TaskController(ITaskService taskService) : ControllerBase
+    public class TaskController(ITaskServiceV2 taskService) : ControllerBase
     {
         /// <summary>
         /// Creates a new task.
@@ -17,9 +19,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="400">If the task is invalid.</response>
         [HttpPost]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(TaskDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TaskDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> CreateTask([FromBody] TaskDto taskDto)
+        public async Task<IActionResult> CreateTask([FromBody] TaskDtoV2 taskDto)
         {
             if (!ModelState.IsValid)
             {
@@ -46,9 +48,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="404">If the task is not found.</response>
         [HttpGet("user/{userId}")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(TaskDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TaskDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<TaskDto>> GetTasksByUser(int userId)
+        public async Task<ActionResult<TaskDtoV2>> GetTasksByUser(int userId)
         {
             var tasks = await taskService.GetTasksByUserIdAsync(userId);
             if (tasks == null || tasks.Count == 0)
@@ -67,9 +69,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="404">If the task is not found.</response>
         [HttpGet("project/{projectId}")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(TaskDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TaskDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<TaskDto>> GetTasksByProject(int projectId)
+        public async Task<ActionResult<TaskDtoV2>> GetTasksByProject(int projectId)
         {
             var tasks = await taskService.GetTasksByProjectIdAsync(projectId);
             if (tasks == null || tasks.Count == 0)
@@ -111,9 +113,9 @@ namespace TaskManagementSystem.Controllers
         /// <response code="200">Returns the task.</response>
         /// <response code="404">If the task is not found.</response>
         [HttpGet("{taskId}")]
-        [ProducesResponseType(typeof(TaskDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TaskDtoV2), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<TaskDto>> GetTaskById(string taskId)
+        public async Task<ActionResult<TaskDtoV2>> GetTaskById(string taskId)
         {
             var task = await taskService.GetTasksByIdAsync(taskId);
             if (task == null)
@@ -121,6 +123,18 @@ namespace TaskManagementSystem.Controllers
                 return NotFound();
             }
             return Ok(task);
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<List<TaskDtoV2>>> SearchTasks(
+            [FromQuery] string keyword,
+            [FromQuery] string status,
+            [FromQuery] DateTime dueDate,
+            [FromQuery] int pageNumber,
+            [FromQuery] int pageSize = 10)
+        {
+            var tasks = await taskService.SearchTasksAsync(keyword, status, dueDate, pageNumber, pageSize);
+            return Ok(tasks);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace TaskManagementSystem.DTOs
+﻿namespace TaskManagementSystem.DTOs.V1
 {
     public class UserDto
     {

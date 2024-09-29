@@ -1,8 +1,8 @@
-﻿using TaskManagementSystem.DTOs;
+﻿using TaskManagementSystem.DTOs.V1;
 using TaskManagementSystem.Entities;
 using TaskManagementSystem.Repositories;
 
-namespace TaskManagementSystem.Services
+namespace TaskManagementSystem.Services.V1
 {
     public class ProjectService(IProjectRepository projectRepository,
         IUserRepository userRepository) : IProjectService

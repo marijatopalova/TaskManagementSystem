@@ -17,5 +17,7 @@ namespace TaskManagementSystem.Repositories
         Task<IEnumerable<TaskItem>> GetTasksByUserIdAsync(int userId);
 
         Task<IEnumerable<TaskItem>> GetTasksByProjectIdAsync(int projectId);
+
+        IEnumerable<TaskItem> GetAllTasksAsQueryable();
     }
 }

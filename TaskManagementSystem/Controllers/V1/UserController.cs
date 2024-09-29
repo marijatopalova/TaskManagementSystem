@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskManagementSystem.DTOs;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.DTOs.V1;
+using TaskManagementSystem.Services.V1;
 
-namespace TaskManagementSystem.Controllers
+namespace TaskManagementSystem.Controllers.V1
 {
-    [Route("api/user")]
+    [ApiVersion("1.0")]
+    [Route("api/v{version:apiVersion}/users")]
     [ApiController]
     public class UserController(IUserService userService) : ControllerBase
     {

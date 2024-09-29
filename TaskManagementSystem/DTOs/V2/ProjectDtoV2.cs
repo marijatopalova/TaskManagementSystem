@@ -1,6 +1,6 @@
-﻿namespace TaskManagementSystem.DTOs
+﻿namespace TaskManagementSystem.DTOs.V2
 {
-    public class ProjectDto
+    public class ProjectDtoV2
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -8,7 +8,7 @@
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
 
-        public List<TaskDto> Tasks { get; set; } = [];
-        public List<UserDto> Users { get; set; } = [];
+        public List<TaskDtoV2> Tasks { get; set; } = [];
+        public List<UserDtoV2> Users { get; set; } = [];
     }
 }

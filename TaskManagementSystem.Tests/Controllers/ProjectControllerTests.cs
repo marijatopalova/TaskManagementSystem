@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskManagementSystem.Controllers;
+using TaskManagementSystem.Controllers.V1;
 using TaskManagementSystem.DTOs;
-using TaskManagementSystem.Services;
+using TaskManagementSystem.DTOs.V2;
+using TaskManagementSystem.Services.V1;
 
 namespace TaskManagementSystem.Tests.Controllers
 {
@@ -31,7 +32,7 @@ namespace TaskManagementSystem.Tests.Controllers
             _projectController.ModelState.AddModelError("Title", "Required");
 
             // Act
-            var result = await _projectController.CreateProject(new ProjectDto());
+            var result = await _projectController.CreateProject(new ProjectDtoV2());
 
             // Assert
             Assert.That(result.Result, Is.InstanceOf<BadRequestObjectResult>());
@@ -41,7 +42,7 @@ namespace TaskManagementSystem.Tests.Controllers
         public async Task CreateProject_ShouldReturnOk_WhenProjectIsCreated()
         {
             // Arrange
-            var projectDto = new ProjectDto { Name = "New Project" };
+            var projectDto = new ProjectDtoV2 { Name = "New Project" };
             _mockProjectService.Setup(service => service.CreateProjectAsync(projectDto))
                 .ReturnsAsync(projectDto);
 
@@ -62,7 +63,7 @@ namespace TaskManagementSystem.Tests.Controllers
         public async Task GetAllProjects_ShouldReturnOkWithProjectList()
         {
             // Arrange
-            var projects = new List<ProjectDto>
+            var projects = new List<ProjectDtoV2>
             {
                 new() { Name = "Project 1" },
                 new() { Name = "Project 2" }
@@ -90,7 +91,7 @@ namespace TaskManagementSystem.Tests.Controllers
             // Arrange
             int projectId = 1;
             _mockProjectService.Setup(service => service.GetProjectByIdAsync(projectId))
-                .ReturnsAsync((ProjectDto)null);
+                .ReturnsAsync((ProjectDtoV2)null);
 
             // Act
             var result = await _projectController.GetProjectById(projectId);
@@ -104,7 +105,7 @@ namespace TaskManagementSystem.Tests.Controllers
         {
             // Arrange
             int projectId = 1;
-            var project = new ProjectDto { Name = "Project 1" };
+            var project = new ProjectDtoV2 { Name = "Project 1" };
 
             _mockProjectService.Setup(service => service.GetProjectByIdAsync(projectId))
                 .ReturnsAsync(project);

@@ -1,6 +1,6 @@
-﻿using TaskManagementSystem.DTOs;
+﻿using TaskManagementSystem.DTOs.V1;
 
-namespace TaskManagementSystem.Services
+namespace TaskManagementSystem.Services.V1
 {
     public interface ITaskService
     {

@@ -31,6 +31,14 @@ namespace TaskManagementSystem.Repositories
                 .ToListAsync();
         }
 
+        public IEnumerable<TaskItem> GetAllTasksAsQueryable()
+        {
+            return dbContext.Tasks
+                .Include(x => x.User)
+                .Include(x => x.Project)
+                .AsQueryable();
+        }
+
         public async Task<TaskItem> GetTaskByIdAsync(string id)
         {
             return await dbContext.Tasks
